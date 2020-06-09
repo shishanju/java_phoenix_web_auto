@@ -1,5 +1,6 @@
 package com.lemon.auto.phoenix.base;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.testng.annotations.Test;
 
 import com.lemon.auto.phoenix.testcase.RegisterTester;
@@ -54,17 +55,26 @@ public class BastTester {
 	}
 		
 		public WebElement getElement(final By by) {
+
 			return getElement(5, by);
 		}
 		
 		
 		public WebElement getElement(String keyword) {
-			return getElement(5, keyword);
+
+			return getElement(5,keyword);
 		}
-		
-		
-		public WebElement getElement(long timeOutInSeconds, String keyword) {
-			HashMap<String, Locator> locatorMap = LocatorUtil.getPageMapByPageName(this.getClass().getName());
+
+	public WebElement getElement(String keyword, Class<?> clazz){
+		return getElement(5,keyword,  clazz);
+	}
+
+	public WebElement getElement(long timeOutInSeconds, String keyword) {
+		return getElement(timeOutInSeconds, keyword, this.getClass());
+	}
+
+	public WebElement getElement(long timeOutInSeconds, String keyword, Class<?> clazz) {
+			HashMap<String, Locator> locatorMap = LocatorUtil.getPageMapByPageName(clazz.getName());
 			
 			Locator locator = locatorMap.get(keyword);
 			//定位方式
